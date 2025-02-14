@@ -1,0 +1,23 @@
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+app = FastAPI()
+
+origins = ["http://localhost:3000"]  # React app running on port 3000
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+@app.get("/")
+def root():
+    """
+    Main entry point of the API.
+
+    Returns a simple JSON with a friendly message.
+    """
+    return {"message": "Hello World"}
